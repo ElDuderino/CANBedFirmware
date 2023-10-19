@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <mcp_can.h>
 #include <mcp_can_dfs.h>
+#include <SensorTypes.h>
 
 #define CANint 2
 #define LED2 8
@@ -11,6 +12,7 @@ unsigned char buf[8];
 unsigned long ID = 0;
 unsigned long line = 0;
 unsigned long now;
+unsigned long DEVICE_MAC = 0;
 
 MCP_CAN CAN0(9); // Set CS to pin 9 for CAN RP2040
 
@@ -255,33 +257,40 @@ void outputResults() {
     shunts[i] = false;
   }
   */
+
+  sendPacket(EV_BAT_TEMP_1, temps[0]);
+  sendPacket(EV_BAT_TEMP_2, temps[1]);
+  sendPacket(EV_BAT_TEMP_3, temps[2]);
+  sendPacket(EV_BAT_TEMP_4, temps[3]);
   
-  for(int i = 1; i < 5; i++) {  // Display Temps
-      Serial.print("Temp ");
-      Serial.print(i);
-      Serial.print(" ");
-      Serial.println(temps[i-1]);
-      temps[i-1] = 0; 
-  }
+  sendPacket(EV_BAT_HV_BAT_VOLTAGE, HVBattery);
   
-  Serial.print("HV Battery: "); //Display the rest of the data
-  Serial.print(HVBattery);
-  Serial.println("V");
-  Serial.print("LV Battery: ");
-  Serial.print(LVBattery);
-  Serial.println("V");
-  Serial.print("SOH: ");
-  Serial.print(SOH);
-  Serial.println("%");
-  Serial.print("SOC: ");
-  Serial.print(SOC);
-  Serial.println("%");
-  Serial.print("Capacity: ");
-  Serial.print(capacity);
-  Serial.println("Ah");
-  Serial.print("Current: ");
-  Serial.print(current);
-  Serial.println("amps");
+  sendPacket(550, LVBattery);
+
+  sendPacket(EV_BAT_SOH, SOH);
+  
+  sendPacket(EV_BAT_SOC, SOC);
+  sendPacket(EV_BAT_AHR, capacity);
+  sendPacket(EV_BAT_HV_BAT_CURRENT_1, current);
+}
+
+/**
+ * @brief Write a data packet to the UART the middleware can decode
+ * 
+ * @param type 
+ * @param data 
+ */
+void sendPacket(uint16_t type, float data){
+
+		Serial.print(DEVICE_MAC, DEC);
+		Serial.print(",");
+		Serial.print(type, DEC);
+		Serial.print(",");
+		Serial.print(data, 6);
+		Serial.print("\n");
+
+    delay(1);
+
 }
 
 void loop() {
