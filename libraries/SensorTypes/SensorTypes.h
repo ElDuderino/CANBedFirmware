@@ -80,23 +80,22 @@
  */
  enum EVBatterySensorTypes{ 
 
-    SYS_NO_REQUEST =    0x200,    //512 decimal (idle statue command)
-    EV_BAT_HX =   0x201,    //513 decimal (high voltage battery's health)
-    EV_BAT_SOC =  0x202,    //514 decimal (state of charge of the HV battery)
-    EV_BAT_AHR =  0x203,    //515 decimal (Capacity of HV battery (how much energy the battery [sic] could hold when fully charged)
-    EV_BAT_HV_BAT_CURRENT_1 = 0x204, //516 decimal (High voltage battery current. Positive when driving, negative when regen braking or charging)
-    EV_BAT_HV_BAT_CURRENT_2 = 0x205, //517 decimal (Unclear why there are two.. but there are!)
-    EV_BAT_HV_BAT_VOLTAGE =   0x206, //518 decimal (High voltage battery voltage)
+    SYS_NO_REQUEST =          0x200,    //512 decimal (idle statue command)
+    EV_BAT_HX =               0x201,    //513 decimal (high voltage battery's health)
+    EV_BAT_SOC =              0x202,    //514 decimal (state of charge of the HV battery)
+    EV_BAT_AHR =              0x203,    //515 decimal (Capacity of HV battery (how much energy the battery [sic] could hold when fully charged)
+    EV_BAT_HV_BAT_CURRENT_1 = 0x204,    //516 decimal (High voltage battery current. Positive when driving, negative when regen braking or charging)
+    EV_BAT_HV_BAT_CURRENT_2 = 0x205,    //517 decimal (Unclear why there are two.. but there are!)
+    EV_BAT_HV_BAT_VOLTAGE =   0x206,    //518 decimal (High voltage battery voltage)
+    EV_BAT_TEMP_1 =           0x208,    //520 decimal (packs temperatures (degrees C))
+    EV_BAT_TEMP_2 =           0x209,    //521 decimal           ''
+    EV_BAT_TEMP_3 =           0x20A,    //522 decimal           ''
+    EV_BAT_TEMP_4 =           0x20B,    //523 decimal           ''
+    EV_BAT_SHUNTS =           0x20C,    //524 decimal (shunt statuses for all cell shunts (in the case of EV leaf, 96 shuts))
+    EV_BAT_SOH =              0x20D,    //525 decimal (State of Health is another indication of the battery’s ability to hold and release energy. Expressed as %)
+    REQUEST_ALL =             0x20E,    //526 decimal 
     // we will not support this directly right now, but will in the future as an extended type
-    EV_BAT_CELL_VOLTAGES =    0x207, //519 decimal (cells voltage - this is the voltages (in mV) from the N cell pairs (96 in the leaf for example))
-    EV_BAT_TEMP_1 =           0x208, //520 decimal (packs temperatures (degrees C))
-    EV_BAT_TEMP_2 =           0x209, //521 decimal           ''
-    EV_BAT_TEMP_3 =           0x20A, //522 decimal           ''
-    EV_BAT_TEMP_4 =           0x20B, //523 decimal           ''
-    EV_BAT_SHUNTS =           0x20C, //524 decimal (shunt statuses for all cell shunts (in the case of EV leaf, 96 shuts))
-    EV_BAT_SOH =              0x20D, //525 decimal (State of Health is another indication of the battery’s ability to hold and release energy. Expressed as %)
-    REQUEST_ALL =             0x20E, //526 decimal 
-
+    EV_BAT_CELL_VOLTAGES =    0x258,    //600 decimal (cells voltage - this is the voltages (in mV) from the N cell pairs (96 in the leaf for example))
 };
 
 typedef struct {

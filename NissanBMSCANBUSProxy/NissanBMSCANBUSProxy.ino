@@ -245,6 +245,7 @@ void output() {
 }
 
 void outputResults() {
+  
   /**
   for(int i = 0; i < 96; i++) { // Display Cell Voltage and Shunts
     Serial.print("Cell ");
@@ -257,6 +258,9 @@ void outputResults() {
     shunts[i] = false;
   }
   */
+  for(int i = 0; i < 96; i++){
+    sendpacket(EV_BAT_CELL_VOLTAGES + i, cellVoltage[i]);
+  }
 
   sendPacket(EV_BAT_TEMP_1, temps[0]);
   sendPacket(EV_BAT_TEMP_2, temps[1]);
