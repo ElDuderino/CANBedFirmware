@@ -261,7 +261,7 @@ void outputResults() {
   }
   */
   for(int i = 0; i < 96; i++){
-    sendpacket(EV_BAT_CELL_VOLTAGES + i, cellVoltage[i]);
+    sendPacket(EV_BAT_CELL_VOLTAGES + i, cellVoltage[i]);
   }
 
   sendPacket(EV_BAT_TEMP_1, temps[0]);
@@ -279,7 +279,7 @@ void outputResults() {
   sendPacket(EV_BAT_AHR, capacity);
   sendPacket(EV_BAT_HV_BAT_CURRENT_1, current);
 
-  sendPacket(0,0,0); //send the flush packet
+  sendPacket(0,0.0); //send the flush packet
 
   delay(DELAY_MILLIS);
 }
