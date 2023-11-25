@@ -51,6 +51,8 @@ boolean shuntsReading = false;
 boolean shunts[96]; // All shunt values
 int shuntCount = 0;
 
+uint32_t DELAY_MILLIS = 5000;
+
 void setup() {
   Serial.begin(115200);
 
@@ -276,6 +278,10 @@ void outputResults() {
   sendPacket(EV_BAT_SOC, SOC);
   sendPacket(EV_BAT_AHR, capacity);
   sendPacket(EV_BAT_HV_BAT_CURRENT_1, current);
+
+  sendPacket(0,0,0); //send the flush packet
+
+  delay(DELAY_MILLIS);
 }
 
 /**
@@ -292,12 +298,12 @@ void sendPacket(uint16_t type, float data){
 		Serial.print(",");
 		Serial.print(data, 6);
 		Serial.print("\n");
-
     delay(1);
 
 }
 
 void loop() {
+
   now = millis();
   
   BMSQuery = (now / 1000) % 10; //Each Second ask a different question
