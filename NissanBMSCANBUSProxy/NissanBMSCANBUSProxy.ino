@@ -260,10 +260,7 @@ void outputResults() {
     shunts[i] = false;
   }
   */
-  for(int i = 0; i < 96; i++){
-    sendPacket(EV_BAT_CELL_VOLTAGES + i, cellVoltage[i]);
-  }
-
+  sendCellVoltages();
   sendPacket(EV_BAT_TEMP_1, temps[0]);
   sendPacket(EV_BAT_TEMP_2, temps[1]);
   sendPacket(EV_BAT_TEMP_3, temps[2]);
@@ -282,6 +279,22 @@ void outputResults() {
   sendPacket(0,0.0); //send the flush packet
 
   delay(DELAY_MILLIS);
+}
+
+void sendCellVoltages(){
+
+  Serial.print(DEVICE_MAC, DEC);
+  Serial.print(',');
+  Serial.print(EV_BAT_CELL_VOLTAGES);
+  Serial.print(',');
+  for(int i = 0; i < 96; i++){
+    Serial.print(cellVoltage[i], 3);
+    if(i < 96 - 1){
+      Serial.print('|');
+    }
+  }
+  Serial.print('\n');
+
 }
 
 /**
