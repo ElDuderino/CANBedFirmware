@@ -1,0 +1,5 @@
+Description of the Nissan CAN messages
+https://github.com/dalathegreat/leaf_can_bus_messages
+
+Kvaser Database Editor 3 (viewer to view the above files)
+https://www.kvaser.com/download/?utm_source=software&utm_ean=7330130981942&utm_status=latest
